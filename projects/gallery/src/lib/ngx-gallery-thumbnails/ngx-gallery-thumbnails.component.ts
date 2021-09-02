@@ -21,7 +21,7 @@ import {NgxGalleryOrder} from '../ngx-gallery-order';
   styleUrls: ['./ngx-gallery-thumbnails.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NgxGalleryThumbnailsComponent implements OnInit, OnChanges {
+export class NgxGalleryThumbnailsComponent implements OnChanges {
   thumbnailsLeft: string;
   thumbnailsMarginLeft: string;
   mouseenter: boolean;
@@ -57,9 +57,6 @@ export class NgxGalleryThumbnailsComponent implements OnInit, OnChanges {
 
   constructor(private sanitization: DomSanitizer, private elementRef: ElementRef,
               private helperService: NgxGalleryService) {
-  }
-
-  ngOnInit() {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -253,12 +250,12 @@ export class NgxGalleryThumbnailsComponent implements OnInit, OnChanges {
     }
   }
 
-  getSafeUrl(image: string): SafeStyle {
-    return this.sanitization.bypassSecurityTrustStyle(this.helperService.getBackgroundUrl(image));
+  getSafeUrl(image: string | SafeResourceUrl): SafeStyle {
+    return this.sanitization.bypassSecurityTrustStyle(this.helperService.getBackgroundUrl(image as string));
   }
 
-  getFileType(fileSource: string): string {
-    return this.helperService.getFileType(fileSource);
+  getFileType(fileSource: string | SafeResourceUrl): string {
+    return this.helperService.getFileType(fileSource as string);
   }
 
   private getThumbnailPosition(index: number, count: number): SafeStyle {

@@ -1,21 +1,21 @@
 {
-  "name": "@kolkov/ngx-gallery",
+  "name": "@farin/ngx-gallery",
   "version": "1.2.0",
-  "description": "A simple responsive native gallery component for Angular 8+",
-  "homepage": "https://github.com/kolkov/ngx-gallery",
+  "description": "A simple responsive native gallery component for Angular 11+",
+  "homepage": "https://github.com/farin/ngx-gallery",
   "author": {
     "name": "Andrey Kolkov",
-    "url": "https://github.com/kolkov"
+    "url": "https://github.com/farin"
   },
-  "repository": "https://github.com/kolkov/ngx-gallery",
+  "repository": "https://github.com/farin/ngx-gallery",
   "license": "MIT",
   "private": false,
   "bugs": {
-    "url": "https://github.com/kolkov/ngx-gallery/issues"
+    "url": "https://github.com/farin/ngx-gallery/issues"
   },
   "peerDependencies": {
-    "@angular/common": ">=8.0.0",
-    "@angular/core": ">=8.0.0"
+    "@angular/common": ">=11.0.0",
+    "@angular/core": ">=11.0.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"

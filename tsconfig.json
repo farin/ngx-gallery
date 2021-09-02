@@ -19,16 +19,18 @@
       "dom"
     ],
     "paths": {
-      "@kolkov/ngx-gallery": [
+      "@farin/ngx-gallery": [
         "dist/gallery"
       ],
-      "@kolkov/ngx-gallery/*": [
+      "@farin/ngx-gallery/*": [
         "dist/gallery/*"
       ]
     }
   },
   "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   }
 }

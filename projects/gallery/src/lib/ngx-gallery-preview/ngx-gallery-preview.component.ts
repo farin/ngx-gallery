@@ -72,7 +72,7 @@ export class NgxGalleryPreviewComponent implements OnInit, OnDestroy, OnChanges 
   @Input() rotateRightIcon: string;
   @Input() download: boolean;
   @Input() downloadIcon: string;
-  @Input() bullets: string;
+  @Input() bullets: boolean;
 
   @Output() previewOpen = new EventEmitter();
   @Output() previewClose = new EventEmitter();
@@ -272,8 +272,8 @@ export class NgxGalleryPreviewComponent implements OnInit, OnDestroy, OnChanges 
     }
   }
 
-  getSafeUrl(image: string): SafeUrl {
-    return this.sanitization.bypassSecurityTrustUrl(image);
+  getSafeUrl(image: string | SafeResourceUrl): SafeUrl {
+    return this.sanitization.bypassSecurityTrustUrl(image as string);
   }
 
   getFileType(fileSource: string): string {

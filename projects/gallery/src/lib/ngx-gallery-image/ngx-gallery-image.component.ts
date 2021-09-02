@@ -10,12 +10,12 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
-import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
+import {DomSanitizer, SafeResourceUrl, SafeStyle} from '@angular/platform-browser';
 import {NgxGalleryService} from '../ngx-gallery.service';
 import {NgxGalleryOrderedImage} from '../ngx-gallery-ordered-image';
 import {NgxGalleryAction} from '../ngx-gallery-action';
 import {NgxGalleryAnimation} from '../ngx-gallery-animation';
-import {animate, style, transition, trigger, state} from '@angular/animations';
+import {animate, style, transition, trigger, state, AnimationEvent} from '@angular/animations';
 
 type Orientation = ('slideLeft' | 'slideRight' | 'fade' | 'rotateLeft' | 'rotateRight' | 'zoom' | 'none');
 
@@ -397,8 +397,8 @@ export class NgxGalleryImageComponent implements OnInit, OnChanges {
     }
   }
 
-  getSafeUrl(image: string): SafeStyle {
-    return this.sanitization.bypassSecurityTrustStyle(this.helperService.getBackgroundUrl(image));
+  getSafeUrl(image: string | SafeResourceUrl): SafeStyle {
+    return this.sanitization.bypassSecurityTrustStyle(this.helperService.getBackgroundUrl(image as string));
   }
 
   getFileType(fileSource: string) {
