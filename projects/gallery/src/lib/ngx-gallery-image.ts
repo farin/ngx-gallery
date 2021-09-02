@@ -1,12 +1,14 @@
 import { SafeResourceUrl } from '@angular/platform-browser';
 
+export type NgxGalleryImageType = 'image' | 'video' | 'unknown';
+
 export interface INgxGalleryImage {
     small?: string | SafeResourceUrl;
     medium?: string | SafeResourceUrl;
     big?: string | SafeResourceUrl;
     description?: string;
     url?: string;
-    type?: string;
+    type?: NgxGalleryImageType;
     label?: string;
 }
 
@@ -16,7 +18,7 @@ export class NgxGalleryImage implements INgxGalleryImage {
     big?: string | SafeResourceUrl;
     description?: string;
     url?: string;
-    type?: string;
+    type?: NgxGalleryImageType;
     label?: string;
 
     constructor(obj: INgxGalleryImage) {

@@ -1,4 +1,5 @@
 import {ElementRef, Injectable, Renderer2} from '@angular/core';
+import { NgxGalleryImageType } from './ngx-gallery-image';
 
 @Injectable({
   providedIn: 'root'
@@ -41,9 +42,10 @@ export class NgxGalleryService {
     return 'url(\'' + this.validateUrl(image) + '\')';
   }
 
-  getFileType(fileSource: string): string {
+  getFileType(fileSource: string): NgxGalleryImageType {
     if (fileSource.startsWith('data:')) {
-      return fileSource.substr(5, Math.min(fileSource.indexOf(';'), fileSource.indexOf('/')) - 5);
+      const t = fileSource.substr(5, Math.min(fileSource.indexOf(';'), fileSource.indexOf('/')) - 5);
+      return t === 'image' || t === 'video' ? t : 'unknown';
     }
     if (fileSource.startsWith('blob:')) {
       return 'image';
