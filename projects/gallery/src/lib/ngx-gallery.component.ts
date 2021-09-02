@@ -73,7 +73,7 @@ export class NgxGalleryComponent implements OnInit, DoCheck, AfterViewInit {
   constructor(private myElement: ElementRef, private helperService: NgxGalleryService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.options = this.options.map((opt) => new NgxGalleryOptions(opt));
     this.sortOptions();
     this.setBreakpoint();
@@ -114,7 +114,7 @@ export class NgxGalleryComponent implements OnInit, DoCheck, AfterViewInit {
     this.checkFullWidth();
   }
 
-  @HostListener('window:resize') onResize() {
+  @HostListener('window:resize') onResize(): void {
     this.setBreakpoint();
 
     if (this.prevBreakpoint !== this.breakpoint) {
@@ -190,11 +190,11 @@ export class NgxGalleryComponent implements OnInit, DoCheck, AfterViewInit {
     }
   }
 
-  selectFromImage(index: number) {
+  selectFromImage(index: number): void {
     this.select(index);
   }
 
-  selectFromThumbnails(index: number) {
+  selectFromThumbnails(index: number): void {
     this.select(index);
 
     if (this.currentOptions && this.currentOptions.thumbnails && this.currentOptions.preview
@@ -231,23 +231,23 @@ export class NgxGalleryComponent implements OnInit, DoCheck, AfterViewInit {
     }
   }
 
-  previewSelect(index: number) {
+  previewSelect(index: number): void {
     this.previewChange.emit({index, image: this.images[index]});
   }
 
-  moveThumbnailsRight() {
+  moveThumbnailsRight(): void {
     this.thumbnails.moveRight();
   }
 
-  moveThumbnailsLeft() {
+  moveThumbnailsLeft(): void {
     this.thumbnails.moveLeft();
   }
 
-  canMoveThumbnailsRight() {
+  canMoveThumbnailsRight(): boolean {
     return this.thumbnails.canMoveRight();
   }
 
-  canMoveThumbnailsLeft() {
+  canMoveThumbnailsLeft(): boolean {
     return this.thumbnails.canMoveLeft();
   }
 
@@ -330,7 +330,7 @@ export class NgxGalleryComponent implements OnInit, DoCheck, AfterViewInit {
     Object.keys(second).map((val) => first[val] = second[val] !== undefined ? second[val] : first[val]);
   }
 
-  setAnimating(event: boolean) {
+  setAnimating(event: boolean): void {
     this.isAnimating = event;
   }
 }

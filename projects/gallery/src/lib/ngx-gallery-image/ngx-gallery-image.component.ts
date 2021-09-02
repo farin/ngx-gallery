@@ -87,8 +87,8 @@ type Orientation = ('slideLeft' | 'slideRight' | 'fade' | 'rotateLeft' | 'rotate
 export class NgxGalleryImageComponent implements OnInit, OnChanges {
   @Input() images: NgxGalleryOrderedImage[];
   @Input() clickable: boolean;
-  // tslint:disable-next-line:variable-name
-  _selectedIndex;
+  _selectedIndex: number;
+
   @Input()
   set selectedIndex(index: number) {
     if (index > this._selectedIndex) {
@@ -163,7 +163,7 @@ export class NgxGalleryImageComponent implements OnInit, OnChanges {
   // @HostBinding('style.display') public display = 'inline-block';
   // @HostBinding('style.background-color') public color = 'lime';
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.arrows && this.arrowsAutoHide) {
       this.arrows = false;
     }
@@ -179,7 +179,7 @@ export class NgxGalleryImageComponent implements OnInit, OnChanges {
     }
   }
 
-  @HostListener('mouseenter') onMouseEnter() {
+  @HostListener('mouseenter') onMouseEnter(): void {
     if (this.arrowsAutoHide && !this.arrows) {
       this.arrows = true;
     }
@@ -189,7 +189,7 @@ export class NgxGalleryImageComponent implements OnInit, OnChanges {
     }
   }
 
-  @HostListener('mouseleave') onMouseLeave() {
+  @HostListener('mouseleave') onMouseLeave(): void {
     if (this.arrowsAutoHide && this.arrows) {
       this.arrows = false;
     }
@@ -244,7 +244,7 @@ export class NgxGalleryImageComponent implements OnInit, OnChanges {
     }, this.autoPlayInterval);
   }
 
-  stopAutoPlay() {
+  stopAutoPlay(): void {
     if (this.timer) {
       clearInterval(this.timer);
     }
@@ -259,7 +259,7 @@ export class NgxGalleryImageComponent implements OnInit, OnChanges {
     }
   }
 
-  show(index: number) {
+  show(index: number): void {
     if (this.isAnimating) {
       return;
     }
@@ -300,7 +300,7 @@ export class NgxGalleryImageComponent implements OnInit, OnChanges {
     this.setChangeTimeout();
   }
 
-  setAction(action: Orientation) {
+  setAction(action: Orientation): void {
     this.action = action;
     this.changeDetectorRef.detectChanges();
   }
@@ -367,7 +367,7 @@ export class NgxGalleryImageComponent implements OnInit, OnChanges {
     }
   }
 
-  setChangeTimeout() {
+  setChangeTimeout(): void {
     this.canChangeImage = false;
     let timeout = 1000;
 
@@ -401,16 +401,16 @@ export class NgxGalleryImageComponent implements OnInit, OnChanges {
     return this.sanitization.bypassSecurityTrustStyle(this.helperService.getBackgroundUrl(image as string));
   }
 
-  getFileType(fileSource: string) {
+  getFileType(fileSource: string): string {
     return this.helperService.getFileType(fileSource);
   }
 
-  onStart(event: AnimationEvent) {
+  onStart(event: AnimationEvent): void {
     this.isAnimating = true;
     this.animating.emit(true);
   }
 
-  onDone(event: AnimationEvent) {
+  onDone(event: AnimationEvent): void {
     this.isAnimating = false;
     this.animating.emit(false);
   }

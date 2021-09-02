@@ -74,11 +74,11 @@ export class NgxGalleryThumbnailsComponent implements OnChanges {
     }
   }
 
-  @HostListener('mouseenter') onMouseEnter() {
+  @HostListener('mouseenter') onMouseEnter(): void {
     this.mouseenter = true;
   }
 
-  @HostListener('mouseleave') onMouseLeave() {
+  @HostListener('mouseleave') onMouseLeave(): void {
     this.mouseenter = false;
   }
 

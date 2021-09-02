@@ -37,7 +37,7 @@ export class NgxGalleryService {
     }
   }
 
-  getBackgroundUrl(image: string) {
+  getBackgroundUrl(image: string): string {
     return 'url(\'' + this.validateUrl(image) + '\')';
   }
 

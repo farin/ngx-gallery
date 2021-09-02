@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'ngx-gallery-action',
@@ -11,9 +11,9 @@ export class NgxGalleryActionComponent {
   @Input() disabled = false;
   @Input() titleText = '';
 
-  @Output() closeClick: EventEmitter<Event> = new EventEmitter();
+  @Output() closeClick = new EventEmitter<Event>();
 
-  handleClick(event: Event) {
+  handleClick(event: Event): void {
     if (!this.disabled) {
       this.closeClick.emit(event);
     }

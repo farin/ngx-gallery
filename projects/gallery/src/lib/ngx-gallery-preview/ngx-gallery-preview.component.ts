@@ -78,7 +78,7 @@ export class NgxGalleryPreviewComponent implements OnInit, OnDestroy, OnChanges 
   @Output() previewClose = new EventEmitter();
   @Output() activeChange = new EventEmitter<number>();
 
-  @ViewChild('previewImage') previewImage: any;
+  @ViewChild('previewImage') previewImage: ElementRef;
 
   private isOpen = false;
   private timer;
@@ -95,7 +95,7 @@ export class NgxGalleryPreviewComponent implements OnInit, OnDestroy, OnChanges 
               private changeDetectorRef: ChangeDetectorRef) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.arrows && this.arrowsAutoHide) {
       this.arrows = false;
     }
@@ -108,25 +108,25 @@ export class NgxGalleryPreviewComponent implements OnInit, OnDestroy, OnChanges 
     }
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.keyDownListener) {
       this.keyDownListener();
     }
   }
 
-  @HostListener('mouseenter') onMouseEnter() {
+  @HostListener('mouseenter') onMouseEnter(): void {
     if (this.arrowsAutoHide && !this.arrows) {
       this.arrows = true;
     }
   }
 
-  @HostListener('mouseleave') onMouseLeave() {
+  @HostListener('mouseleave') onMouseLeave(): void {
     if (this.arrowsAutoHide && this.arrows) {
       this.arrows = false;
     }
   }
 
-  onKeyDown(e) {
+  onKeyDown(e: KeyboardEvent): void {
     if (this.isOpen) {
       if (this.keyboardNavigation) {
         if (this.isKeyboardPrev(e)) {
@@ -157,7 +157,7 @@ export class NgxGalleryPreviewComponent implements OnInit, OnDestroy, OnChanges 
 
   close(): void {
     this.isOpen = false;
-    const video = this.previewImage.nativeElement;
+    const video = this.previewImage.nativeElement as HTMLVideoElement;
     if (
       video.currentTime > 0 &&
       !video.paused &&
@@ -261,7 +261,7 @@ export class NgxGalleryPreviewComponent implements OnInit, OnDestroy, OnChanges 
 
   manageFullscreen(): void {
     if (this.fullscreen || this.forceFullscreen) {
-      const doc = document as any;
+      const doc: any = document;
 
       if (!doc.fullscreenElement && !doc.mozFullScreenElement
         && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
@@ -313,7 +313,7 @@ export class NgxGalleryPreviewComponent implements OnInit, OnDestroy, OnChanges 
   }
 
   getTransform(): SafeStyle {
-    return this.sanitization.bypassSecurityTrustStyle('scale(' + this.zoomValue + ') rotate(' + this.rotateValue + 'deg)');
+    return this.sanitization.bypassSecurityTrustStyle(`scale(${this.zoomValue}) rotate(${this.rotateValue}deg)`);
   }
 
   canZoomIn(): boolean {
@@ -324,11 +324,11 @@ export class NgxGalleryPreviewComponent implements OnInit, OnDestroy, OnChanges 
     return this.zoomValue > this.zoomMin;
   }
 
-  canDragOnZoom() {
+  canDragOnZoom(): boolean {
     return this.zoom && this.zoomValue > 1;
   }
 
-  mouseDownHandler(e): void {
+  mouseDownHandler(e: MouseEvent | TouchEvent): void {
     if (this.canDragOnZoom()) {
       this.initialX = this.getClientX(e);
       this.initialY = this.getClientY(e);
@@ -340,23 +340,32 @@ export class NgxGalleryPreviewComponent implements OnInit, OnDestroy, OnChanges 
     }
   }
 
-  mouseUpHandler(e): void {
+  mouseUpHandler(e: MouseEvent | TouchEvent): void {
     this.isMove = false;
   }
 
-  mouseMoveHandler(e) {
+  mouseMoveHandler(e: MouseEvent| TouchEvent): void {
     if (this.isMove) {
       this.positionLeft = this.initialLeft + (this.getClientX(e) - this.initialX);
       this.positionTop = this.initialTop + (this.getClientY(e) - this.initialY);
     }
   }
 
-  private getClientX(e): number {
-    return e.touches && e.touches.length ? e.touches[0].clientX : e.clientX;
+  private getClientX(e: MouseEvent | TouchEvent): number {
+    if (e instanceof TouchEvent) {
+      return e.touches[0].clientX;
+    } else {
+      return e.clientX;
+    }
+
   }
 
-  private getClientY(e): number {
-    return e.touches && e.touches.length ? e.touches[0].clientY : e.clientY;
+  private getClientY(e: MouseEvent | TouchEvent): number {
+    if (e instanceof TouchEvent) {
+      return e.touches[0].clientY;
+    } else {
+      return e.clientY;
+    }
   }
 
   private resetPosition() {
@@ -366,15 +375,15 @@ export class NgxGalleryPreviewComponent implements OnInit, OnDestroy, OnChanges 
     }
   }
 
-  private isKeyboardNext(e): boolean {
+  private isKeyboardNext(e: KeyboardEvent): boolean {
     return e.keyCode === 39;
   }
 
-  private isKeyboardPrev(e): boolean {
+  private isKeyboardPrev(e: KeyboardEvent): boolean {
     return e.keyCode === 37;
   }
 
-  private isKeyboardEsc(e): boolean {
+  private isKeyboardEsc(e: KeyboardEvent): boolean {
     return e.keyCode === 27;
   }
 
@@ -467,7 +476,7 @@ export class NgxGalleryPreviewComponent implements OnInit, OnDestroy, OnChanges 
     });
   }
 
-  private isLoaded(img): boolean {
+  private isLoaded(img: HTMLImageElement): boolean {
     if (!img.complete) {
       return false;
     }

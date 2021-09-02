@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'ngx-gallery-bullets',
@@ -13,7 +13,7 @@ export class NgxGalleryBulletsComponent {
   @Output() bulletChange = new EventEmitter();
 
   getBullets(): number[] {
-    return Array(this.count);
+    return Array<number>(this.count);
   }
 
   handleChange(event: Event, index: number): void {

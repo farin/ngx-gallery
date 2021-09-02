@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'ngx-gallery-arrows',
@@ -12,10 +12,8 @@ export class NgxGalleryArrowsComponent {
   @Input() arrowPrevIcon: string;
   @Input() arrowNextIcon: string;
 
-  @Output() prevClick = new EventEmitter();
-  @Output() nextClick = new EventEmitter();
-
-  constructor() { }
+  @Output() prevClick = new EventEmitter<void>();
+  @Output() nextClick = new EventEmitter<void>();
 
   handlePrevClick(): void {
     this.prevClick.emit();
